@@ -103,6 +103,12 @@ Me sorpendio mucho ver lo exageradamente lento que es un bubble sort cuando tien
 2. Para listas no tan grandes (menos de 50k), es mucho mas eficiente usar el metodo sort de la clase Arrays de java
 3. El manejo de excepciones es fundamental para que no se propague la excepcion por el resto del codigo, evitando asi que se interrumpa la ejecucion del resto del codigo
 
+### Datos de las mediciones
+
+En la captura, Quick Sort registró **1.3894 ms** con 10 000 elementos, **3.9517 ms** con 50 000 y **6.9858 ms** con 100 000. En los mismos tamaños, Bubble Sort registró 53.4269 ms, 2980.8852 ms y 12426.0086 ms. `Arrays.sort(int[])` obtuvo 0.9561 ms con 10 000 elementos. Estos son los datos de una sola ejecución, no promedios.
+
+La prueba CA09 comprobó que una excepción de la operación se conserva y que no se añade una medición fallida a la lista.
+
 ## Repositorio
 
 - [Código y archivos de la práctica](https://github.com/Sebitou69/icc-est-u2-comparativa)

@@ -107,6 +107,18 @@ public class Pruebas {
             }
             comprobarTodas(ordenado);
         });
+
+        probar("CA11-piramide", () -> {
+            int[] piramide = new int[501];
+            for (int i = 0; i < piramide.length; i++) {
+                piramide[i] = Math.min(i, piramide.length - 1 - i);
+            }
+            int[] esperado = piramide.clone();
+            Arrays.sort(esperado);
+            exigir(piramide[piramide.length / 2] == 250, "El pivote central no es el máximo");
+            ordenamiento.quickSort(piramide, 0, piramide.length - 1);
+            exigir(Arrays.equals(piramide, esperado), "Quick Sort falló con la pirámide");
+        });
     }
 
     private static void probar(String id, Runnable prueba) {

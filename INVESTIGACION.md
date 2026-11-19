@@ -68,7 +68,9 @@ Patrón analizado: una lista que crece hasta el centro y después disminuye, por
 
 En este ejemplo, el primer pivote es 5, el mayor valor. Al particionar, el 5 queda aislado al final y el resto permanece en un tramo grande. Si se repiten divisiones muy desbalanceadas, el trabajo puede aproximarse a `n + (n - 1) + (n - 2) + ... + 1`, que crece como `O(n²)`. No basta con que el centro sea máximo una sola vez: el comportamiento desfavorable depende de que el desequilibrio continúe en las llamadas siguientes.
 
-En [`src/Pruebas.java`](src/Pruebas.java) están verificadas las entradas con 10 000 valores iguales y con 10 000 valores ya ordenados. El patrón de pirámide fue descrito como prueba adicional por el autor, pero todavía no tiene un registro específico en las capturas del repositorio.
+En [`src/Pruebas.java`](src/Pruebas.java) se incluyen los casos de 10 000 valores iguales, 10 000 valores ordenados y **CA11-piramide**, con 501 elementos. En este último, la entrada aumenta de 0 a 250 y luego desciende hasta 0. El pivote inicial es 250, y se verifica que Quick Sort produce el mismo resultado que `Arrays.sort`. Esta entrada comienza con una partición muy desbalanceada: el máximo queda separado del resto.
+
+Se comprobó el caso de pirámide de forma independiente con OpenJDK 21.0.12.1 en Linux y se guardó el resultado en [evidencias/assets/ca11-piramide.txt](evidencias/assets/ca11-piramide.txt). La captura actual de IntelliJ corresponde a la ejecución anterior a esta prueba adicional.
 
 Los resultados reales de Quick Sort en el benchmarking fueron:
 

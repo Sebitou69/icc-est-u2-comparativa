@@ -17,27 +17,31 @@ public class Main {
         int[] listBubble10k = list10k.clone();
         int[] listQuick10k = list10k.clone();
         int[] listJavaSort10k = list10k.clone();
-        Integer[] listComparator10k = new Integer[list10k.length];
+        Integer[] baseComparator10k = new Integer[list10k.length];
         int[] listBubble50k = list50k.clone();
         int[] listQuick50k = list50k.clone();
         int[] listJavaSort50k = list50k.clone();
-        Integer[] listComparator50k = new Integer[list50k.length];
+        Integer[] baseComparator50k = new Integer[list50k.length];
         int[] listBubble100k = list100k.clone();
         int[] listQuick100k = list100k.clone();
         int[] listJavaSort100k = list100k.clone();
-        Integer[] listComparator100k = new Integer[list100k.length];
+        Integer[] baseComparator100k = new Integer[list100k.length];
 
         for (int i = 0; i < list10k.length; i++) {
-            listComparator10k[i] = list10k[i];
+            baseComparator10k[i] = list10k[i];
         }
 
         for (int i = 0; i < list50k.length; i++) {
-            listComparator50k[i] = list50k[i];
+            baseComparator50k[i] = list50k[i];
         }
 
         for (int i = 0; i < list100k.length; i++) {
-            listComparator100k[i] = list100k[i];
+            baseComparator100k[i] = list100k[i];
         }
+
+        Integer[] listComparator10k = baseComparator10k.clone();
+        Integer[] listComparator50k = baseComparator50k.clone();
+        Integer[] listComparator100k = baseComparator100k.clone();
 
         Runnable bubble10k = () -> o.bubbleSort(listBubble10k);
         Runnable quick10k = () -> o.quickSort(listQuick10k, 0, list10k.length - 1);

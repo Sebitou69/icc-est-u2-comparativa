@@ -114,4 +114,3 @@ La prueba CA09 comprobó que una excepción de la operación se conserva y que n
 - [Código y archivos de la práctica](https://github.com/Sebitou69/icc-est-u2-comparativa)
 - [Investigación de Quick Sort](INVESTIGACION.md)
 
-El hash que se entrega en AVAC debe ser el del último commit después de terminar la práctica.

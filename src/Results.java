@@ -35,7 +35,7 @@ public class Results{
     }
 
     public double getDurationMs() {
-        return duration / 1_000_000.0;
+        return duration / 1_000_000_000.0;
     }
 
     @Override

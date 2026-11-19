@@ -1,6 +1,6 @@
 public class Generador {
 
-    public static int[] generate(int size) {
+    public int[] generate(int size) {
         if (size < 0) {
             throw new IllegalArgumentException("The size must be a positive integer");
         }

@@ -7,7 +7,6 @@ public class Pruebas {
 
     private static final Generador generador = new Generador();
     private static final Ordenamiento ordenamiento = new Ordenamiento();
-    private static final Benchmark benchmark = new Benchmark();
     private static final Comparator<Integer> comparador = Integer::compare;
 
     public static void main(String[] args) {
@@ -74,7 +73,7 @@ public class Pruebas {
 
         probar("CA08", () -> {
             int[] datos = {5, 1, 3};
-            Results resultado = benchmark.medir(() -> Arrays.sort(datos), "Prueba", datos.length);
+            Results resultado = Benchmark.medir(() -> Arrays.sort(datos), "Prueba", datos.length);
             exigir(resultado.getFunctionName().equals("Prueba"), "Nombre incorrecto");
             exigir(resultado.getSample() == 3, "Sample incorrecto");
             exigir(resultado.getDuration() >= 0, "Nanosegundos inválidos");
@@ -88,7 +87,7 @@ public class Pruebas {
             RuntimeException original = new IllegalArgumentException("Fallo de prueba");
             boolean recibido = false;
             try {
-                Results resultado = benchmark.medir(() -> { throw original; }, "Fallido", 3);
+                Results resultado = Benchmark.medir(() -> { throw original; }, "Fallido", 3);
                 resultados.add(resultado);
             } catch (RuntimeException e) {
                 recibido = e == original;

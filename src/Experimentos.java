@@ -6,7 +6,6 @@ import java.util.List;
 public class Experimentos {
 
     private final Generador generador = new Generador();
-    private final Benchmark benchmark = new Benchmark();
     private final Ordenamiento ordenamiento = new Ordenamiento();
     private final Comparator<Integer> comparador = Integer::compare;
 
@@ -44,7 +43,7 @@ public class Experimentos {
 
     private Results medirYValidar(Runnable accion, String nombre, int size, Runnable validacion) {
         try {
-            Results resultado = benchmark.medir(accion, nombre, size);
+            Results resultado = Benchmark.medir(accion, nombre, size);
             validacion.run();
             return resultado;
         } catch (RuntimeException e) {

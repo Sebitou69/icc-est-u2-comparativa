@@ -10,8 +10,7 @@ public class Benchmark{
         long tiempoFinal = System.nanoTime();
         //Retornar results
         long tiempoTotal = tiempoFinal - tiempoActual;
-        double tFinal = tiempoTotal / 1_000_000.0;
-        Results results = new Results(tFinal,nombre,sample);
+        Results results = new Results(tiempoTotal,nombre,sample);
         return results;
 
     }

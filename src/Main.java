@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -8,6 +9,7 @@ public class Main {
         Generador g = new Generador();
         Benchmark b = new Benchmark();
         Ordenamiento o = new Ordenamiento();
+        Comparator<Integer> comparador = Integer::compare;
 
         int[] list10k = g.generate(10_000);
         int[] list50k = g.generate(50_000);
@@ -40,17 +42,17 @@ public class Main {
         Runnable bubble10k = () -> o.bubbleSort(listBubble10k);
         Runnable quick10k = () -> o.quickSort(listQuick10k, 0, list10k.length - 1);
         Runnable javaSort10k = () -> o.arraysSort(listJavaSort10k);
-        Runnable comparatorSort10k = () -> o.comparatorSort(listComparator10k);
+        Runnable comparatorSort10k = () -> o.comparatorSort(listComparator10k,comparador);
 
         Runnable bubble50k = () -> o.bubbleSort(listBubble50k);
         Runnable quick50k = () -> o.quickSort(listQuick50k, 0, list50k.length - 1);
         Runnable javaSort50k = () -> o.arraysSort(listJavaSort50k);
-        Runnable comparatorSort50k = () -> o.comparatorSort(listComparator50k);
+        Runnable comparatorSort50k = () -> o.comparatorSort(listComparator50k,comparador);
 
         Runnable  bubble100k = () -> o.bubbleSort(listBubble100k);
         Runnable quick100k = () -> o.quickSort(listQuick100k, 0, listQuick100k.length - 1);
         Runnable javaSort100k = () -> o.arraysSort(listJavaSort100k);
-        Runnable comparatorSort100k = () -> o.comparatorSort(listComparator100k);
+        Runnable comparatorSort100k = () -> o.comparatorSort(listComparator100k,comparador);
 
         List<Results> results = new ArrayList<>();
 

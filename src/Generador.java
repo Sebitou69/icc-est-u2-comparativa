@@ -11,7 +11,7 @@ public class Generador {
         } else {
             int[] list = new int[size];
             for (int i = 0; i < size; i++) {
-                list[i] = (int) (Math.random() * size + 1L);
+                list[i] = (int) (Math.random() * (size + 1L));
             }
             return list;
         }

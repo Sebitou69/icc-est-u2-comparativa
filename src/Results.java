@@ -1,10 +1,10 @@
 public class Results{
 
     private String functionName;
-    private double duration;
+    private long duration;
     private int sample;
 
-    public Results(double duration, String functionName, int sample) {
+    public Results(long duration, String functionName, int sample) {
         this.duration = duration;
         this.functionName = functionName;
         this.sample = sample;
@@ -22,7 +22,7 @@ public class Results{
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
@@ -34,10 +34,14 @@ public class Results{
         this.sample = sample;
     }
 
+    public double getDurationMs() {
+        return duration / 1_000_000.0;
+    }
+
     @Override
     public String toString() {
         return "Metodo: " + functionName + " | " +
-                " Sample: " + sample + " | " + " Duracion: " + duration + " ms";
+                " Sample: " + sample + " | " + " Duracion: " + getDurationMs() + " ms";
     }
 
 }

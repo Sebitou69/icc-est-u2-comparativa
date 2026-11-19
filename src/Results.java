@@ -18,7 +18,7 @@ public class Results{
         this.functionName = functionName;
     }
 
-    public double getDuration() {
+    public long getDuration() {
         return duration;
     }
 

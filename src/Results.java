@@ -2,9 +2,9 @@ public class Results{
 
     private String functionName;
     private double duration;
-    private String sample;
+    private int sample;
 
-    public Results(double duration, String functionName, String sample) {
+    public Results(double duration, String functionName, int sample) {
         this.duration = duration;
         this.functionName = functionName;
         this.sample = sample;
@@ -26,21 +26,18 @@ public class Results{
         this.duration = duration;
     }
 
-    public String getSample() {
+    public int getSample() {
         return sample;
     }
 
-    public void setSample(String sample) {
+    public void setSample(int sample) {
         this.sample = sample;
     }
 
     @Override
     public String toString() {
-        return "Results{" +
-                "functionName='" + functionName + '\'' +
-                ", duration=" + duration +
-                ", sample='" + sample + '\'' +
-                '}';
+        return "Metodo: " + functionName + " | " +
+                " Sample: " + sample + " | " + " Duracion: " + duration + " ms";
     }
 
 }

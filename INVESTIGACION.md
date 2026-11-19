@@ -84,9 +84,9 @@ De 10 000 a 50 000 elementos, el tiempo pasó de 1.3894 a 3.9517 ms. De 50 000 a
 
 ## 7. Fuentes y adaptación
 
-Las dos fuentes indicadas por el autor fueron consultadas el **18 de noviembre de 2026**:
+Las dos fuentes  fueron consultadas el 18 de noviembre de 2026:
 
 1. Stack Overflow. [Stackoverflow with Quicksort Java implementation](https://stackoverflow.com/questions/14907334/stackoverflow-with-quicksort-java-implementation). Pregunta y respuestas sobre el manejo de límites en llamadas recursivas.
 2. GeeksforGeeks. [Quick Sort](https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/). Explicación de pivotes, particiones y complejidad.
 
-El proyecto utiliza una variante con pivote central e índices que avanzan desde ambos extremos. La descripción, la elección de los nombres de variables y la revisión de la recursividad corresponden a la adaptación indicada por el autor, con apoyo de IA en la revisión del código.
+El proyecto utiliza una variante con pivote central e índices que avanzan desde ambos extremos. El proyecto contó con apoyo de IA en la revisión del código, además de brindar una manera de estructurar de manera mas llamativa visualmente todos los archivos .md

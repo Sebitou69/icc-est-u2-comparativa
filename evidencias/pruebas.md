@@ -22,7 +22,7 @@ java -cp build Main
 | CA07 | Ordenar clones de `[8, 8, 3, 5, 3, 0, 1]` | Base intacta, salidas iguales por valor | Base conservada y cuatro salidas correctas | OK | [Pruebas](assets/pruebas-consola.png)              |
 | CA08 | Medir por lambda el ordenamiento de tres números | Nombre, sample y tiempo correcto en ns y ms | `Results` verificado, sin incluir la validación en el tiempo medido | OK | [Pruebas](assets/pruebas-consola.png)              |
 | CA09 | Enviar un Runnable que lanza una excepción | Causa original conservada, ningún resultado válido registrado | Se propagó la misma excepción y la lista permaneció vacía | OK | [Pruebas](assets/pruebas-consola.png)              |
-| CA10 | Ejecutar los tres tamaños con cuatro variantes | 12 objetos, impresión completa y capturas iguales a la tabla del README | 12 resultados impresos; capturas y tabla pendientes | Parcial | [Salida de consola](assets/resultados-consola.png) |
+| CA10 | Ejecutar los tres tamaños con cuatro variantes | 12 objetos, impresión completa y capturas iguales a la tabla del README | 12 resultados impresos; captura y tabla del README con los mismos valores | OK | [Salida de consola](assets/resultados-consola.png) |
 | CA11 | Ejecutar Quick Sort con casos límite y explicar su variante | Código, traza manual y documento coherentes | Pruebas con 10 000 valores iguales y entrada ordenada correctas; traza manual pendiente | Parcial | [Pruebas](assets/pruebas-consola.png)              |
 
 

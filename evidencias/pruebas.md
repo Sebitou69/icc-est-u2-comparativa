@@ -5,6 +5,7 @@ Ejecución comprobada con OpenJDK 21.0.12.1 en un entorno de pruebas Linux. Los 
 Comandos ejecutados desde la raíz del proyecto:
 
 ~~~bash
+mkdir build
 javac -d build src/*.java
 java -cp build Pruebas
 java -cp build Main

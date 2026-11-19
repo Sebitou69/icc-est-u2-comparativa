@@ -1,103 +1,72 @@
-# PL1.1 — Comparativa de métodos de ordenamiento y benchmarking
+# PL1.1 - Comparativa de métodos de ordenamiento
 
-## Datos generales
+## Datos
 
-| Campo | Información |
-|---|---|
-| Institución | Universidad Politécnica Salesiana |
-| Carrera | Computación |
-| Asignatura | Estructura de Datos |
-| Práctica | PL1.1 — Comparativa de métodos de ordenamiento y benchmarking |
-| Docente | Ing. Pablo Torres, Mgtr. |
-| Autor | Sebastián Cárdenas |
-| Repositorio | [icc-est-u2-comparativa](https://github.com/Sebitou69/icc-est-u2-comparativa) |
+- **Universidad:** Universidad Politécnica Salesiana
+- **Carrera:** Computación
+- **Materia:** Estructura de Datos
+- **Docente:** Ing. Pablo Torres, Mgtr.
+- **Autor:** Sebastián Cárdenas
+- **Sistema:** Windows
+- **Java:** JDK 26.0.1
+- **IDE:** IntelliJ IDEA 2026.1.2
+- **Procesador:** Intel Core i5-13420H
+- **RAM:** 32 GB DDR4 (2 módulos de 16 GB)
 
-## 1. Objetivo
+## Objetivo
 
-Comparar el tiempo de ejecución de cuatro variantes de ordenamiento ascendente mediante un generador de muestras, un medidor independiente basado en `Runnable` y una lista de resultados.
+Comparar el tiempo de cuatro variantes de ordenamiento usando arreglos de 10 000, 50 000 y 100 000 elementos.
 
-## 2. Entorno de ejecución
+## Métodos utilizados
 
-| Componente | Información |
-|---|---|
-| Sistema operativo | Windows |
-| Versión de Java | JDK 26.0.1 |
-| IDE | IntelliJ IDEA 2026.1.2 |
-| Procesador | [Completar modelo exacto del equipo de la medición] |
-| Memoria RAM | [Completar capacidad del equipo de la medición] |
+| Variante | Método | Tipo de arreglo |
+|---|---|---|
+| V1 | Burbuja | `int[]` |
+| V2 | Quick Sort | `int[]` |
+| V3 | `Arrays.sort` | `int[]` |
+| V4 | `Arrays.sort` con `Comparator<Integer>` | `Integer[]` |
 
-## 3. Métodos comparados
+Los dos primeros métodos están implementados en `Ordenamiento.java`. V3 y V4 usan la biblioteca de Java. En V4, `Comparator` establece el orden ascendente de los objetos `Integer`.
 
-| Variante | Método | Entrada | Implementación |
-|---|---|---|---|
-| V1 | Burbuja | `int[]` | `Ordenamiento.bubbleSort` |
-| V2 | Quick Sort | `int[]` | `Ordenamiento.quickSort` |
-| V3 | `Arrays.sort` | `int[]` | `Ordenamiento.arraysSort` |
-| V4 | `Arrays.sort` con `Comparator<Integer>` | `Integer[]` | `Ordenamiento.comparatorSort` |
+## Archivos del proyecto
 
-La variante V4 utiliza objetos `Integer` y un comparador ascendente (`Integer::compare`). `Comparator` define el criterio de comparación; no es otro algoritmo de ordenamiento.
+- `src/Generador.java`: genera números aleatorios entre 0 y el tamaño de la muestra.
+- `src/Ordenamiento.java`: contiene los cuatro métodos.
+- `src/Benchmark.java`: recibe un `Runnable` y mide con `System.nanoTime()`.
+- `src/Results.java`: guarda el método, el tamaño (`sample`) y la duración en nanosegundos (`long`); convierte a milisegundos al mostrarla.
+- `src/Experimentos.java`: prepara los arreglos, ejecuta los ordenamientos y valida sus resultados.
+- `src/Pruebas.java`: ejecuta las pruebas de aceptación.
+- `src/Main.java`: imprime la lista final de resultados.
+- `evidencias/pruebas.md`: registra las pruebas y enlaza las capturas de `evidencias/assets/`.
 
-## 4. Estructura del proyecto
+## Cómo ejecutar
 
-```text
-icc-est-u2-comparativa/
-├── src/
-│   ├── Main.java
-│   ├── Generador.java
-│   ├── Ordenamiento.java
-│   ├── Benchmark.java
-│   ├── Results.java
-│   ├── Experimentos.java
-│   └── Pruebas.java
-├── evidencias/
-│   ├── pruebas.md
-│   └── assets/
-│       ├── pruebas-consola.png
-│       └── resultados-consola.png
-├── README.md
-└── INVESTIGACION.md
-```
+Desde IntelliJ IDEA se pueden ejecutar las clases `Pruebas` y `Main` directamente.
 
-| Archivo | Responsabilidad |
-|---|---|
-| `Generador.java` | Crea arreglos `int[]` con valores aleatorios entre 0 y `size`, inclusive; rechaza tamaños negativos. |
-| `Ordenamiento.java` | Implementa los dos métodos propios y las dos variantes de biblioteca. |
-| `Benchmark.java` | Recibe un `Runnable`, el nombre y el tamaño de la muestra; mide con `System.nanoTime()`. |
-| `Results.java` | Guarda nombre, `sample` y duración como `long` en nanosegundos; la presenta en milisegundos. |
-| `Experimentos.java` | Genera muestras, prepara copias, ejecuta y valida los 12 ordenamientos y acumula los resultados. |
-| `Pruebas.java` | Comprueba casos de aceptación por separado de los benchmarks. |
-| `Main.java` | Imprime la lista completa, agrupada por tamaño, después de concluir las mediciones. |
-
-## 5. Compilación y ejecución
-
-Desde IntelliJ IDEA, ejecutar `Pruebas.main()` para las verificaciones y `Main.main()` para las mediciones.
-
-Alternativamente, desde una terminal en la raíz del repositorio, con el JDK instalado:
+Desde la terminal, ubicada en la raíz del repositorio:
 
 ```bash
-javac -d build src/Generador.java src/Ordenamiento.java src/Benchmark.java src/Results.java src/Experimentos.java src/Main.java src/Pruebas.java
+mkdir build
+javac -d build src/*.java
 java -cp build Pruebas
 java -cp build Main
 ```
 
-Antes de compilar, crear la carpeta `build` si todavía no existe. Los archivos compilados no se incluyen en el repositorio.
+El proyecto no requiere librerías externas.
 
-## 6. Procedimiento del benchmarking
+## Cómo se hicieron las mediciones
 
-- Se generan **una muestra por tamaño** para 10 000, 50 000 y 100 000 elementos.
-- Cada variante recibe una **copia independiente** de la misma muestra original, conservando los valores y el orden inicial.
-- La conversión a `Integer[]`, los clones, el comparador y las lambdas se preparan antes de la medición.
-- `Benchmark.medir` mide la operación `Runnable` con `System.nanoTime()` y guarda la diferencia en nanosegundos como `long`.
-- `Results.getDurationMs()` convierte el tiempo a milisegundos dividiendo entre `1_000_000.0`. `sample` representa la cantidad de elementos ordenados.
-- Después de detener el cronómetro se compara la salida con una referencia ordenada. Solo se agrega a `List<Results>` un resultado que supere la validación.
-- Las excepciones se propagan y se conserva la causa original. Una ejecución fallida no produce un tiempo de cero ni se agrega como resultado válido.
-- La generación, la conversión, la clonación, la verificación y la impresión quedan **fuera** del intervalo medido. El trabajo interno que cada algoritmo requiere para ordenar sí forma parte de su duración.
+Para cada tamaño se genera un único arreglo de números aleatorios. Burbuja, Quick Sort, `Arrays.sort` y Comparator reciben copias independientes de ese mismo arreglo, en ese orden.
 
-## 7. Resultados obtenidos
+La generación, las copias, la conversión a `Integer[]` y la creación del comparador se hacen antes del cronómetro. `Benchmark` ejecuta únicamente el ordenamiento recibido como `Runnable`, mide el tiempo en nanosegundos y devuelve un objeto `Results`.
 
-Estos valores se transcriben de la captura de la ejecución de `Main` en IntelliJ IDEA. Corresponden a una ejecución por variante y tamaño.
+Cuando termina cada medición, `Experimentos` comprueba que el arreglo coincida con una copia de referencia ordenada. Si es correcto, lo guarda en `List<Results>`. Si falla, informa el error conservando la excepción original y no registra un resultado exitoso. Después de las doce ejecuciones, `Main` imprime la lista completa.
 
-![Salida de las 12 mediciones](evidencias/assets/resultados-consola.png)
+Los tiempos no incluyen la preparación ni la validación, pero sí el trabajo interno del propio algoritmo.
+
+## Resultados
+
+![Resultados de Main](evidencias/assets/resultados-consola.png)
 
 | Método | Sample | Tiempo (ms) |
 |---|---:|---:|
@@ -114,36 +83,29 @@ Estos valores se transcriben de la captura de la ejecución de `Main` en Intelli
 | Arrays.sort | 100 000 | 8.588 |
 | Comparator sort | 100 000 | 26.7482 |
 
-Los valores se conservan con la precisión decimal mostrada en consola, sin redondearlos ni sustituirlos por tiempos de otras ejecuciones.
+Los valores corresponden a una sola ejecución por método y tamaño en el equipo indicado. No bastan para afirmar que un método será siempre más rápido. La variante con `Comparator` trabaja con `Integer[]`, por lo que no solo cambia el comparador: también cambia la representación de los datos.
 
-## 8. Pruebas y evidencias
+En esta ejecución, `Arrays.sort(int[])` obtuvo el menor tiempo con 10 000 elementos; Quick Sort obtuvo los menores tiempos con 50 000 y 100 000. Se utilizan clones para que ningún método reciba un arreglo que ya haya sido ordenado por otro.
 
-![Salida de las pruebas de aceptación](evidencias/assets/pruebas-consola.png)
+## Pruebas
 
-El registro de entradas, expectativas, resultados observados y estados de CA01–CA11 se encuentra en [evidencias/pruebas.md](evidencias/pruebas.md). La traza manual del algoritmo investigado corresponde al entregable de investigación.
+![Resultados de Pruebas](evidencias/assets/pruebas-consola.png)
 
-## 9. Análisis de los resultados — completar personalmente
+Las entradas, los resultados esperados y los resultados observados de CA01 a CA11 se encuentran en [evidencias/pruebas.md](evidencias/pruebas.md).
 
-Responder con referencia a los valores concretos de la tabla:
+## Análisis personal
 
-1. ¿Cómo cambió el tiempo de cada método entre 10 000, 50 000 y 100 000 elementos?
-2. ¿Cuál registró el menor tiempo para cada tamaño en esta ejecución?
-3. ¿Por qué todas las variantes deben recibir un clon nuevo de la misma muestra?
-4. ¿Qué diferencias influyen al comparar `int[]` frente a `Integer[]` con `Comparator`?
-5. ¿Qué operaciones se midieron y cuáles quedaron fuera? ¿Qué limita una única ejecución por variante y tamaño?
+Me sorpendio mucho ver lo exageradamente lento que es un bubble sort cuando tiene que ordenar arreglos muy largos,
 
-[Redactar aquí el análisis personal de los resultados.]
+## Conclusiones
 
-## 10. Conclusiones — redacción personal obligatoria
+1. El quicksort es enormemente mas rapido que el bubble sort, por lo que debo usar obligatoriamente un quicksort si quiero tener un codigo bien optimizado temporalmente hablando
+2. Para listas no tan grandes (menos de 50k), es mucho mas eficiente usar el metodo sort de la clase Arrays de java
+3. El manejo de excepciones es fundamental para que no se propague la excepcion por el resto del codigo, evitando asi que se interrumpa la ejecucion del resto del codigo
 
-La guía solicita al menos tres conclusiones propias, sin generación ni reescritura mediante IA. Cada una debe apoyarse en cifras reales de la tabla e indicar una decisión de implementación o una limitación.
+## Repositorio
 
-1. [Conclusión personal basada en un método, un tamaño y un tiempo concreto.]
-2. [Conclusión personal sobre una diferencia de representación, implementación o crecimiento.]
-3. [Conclusión personal sobre las limitaciones de medir una sola ejecución.]
+- [Código y archivos de la práctica](https://github.com/Sebitou69/icc-est-u2-comparativa)
+- [Investigación de Quick Sort](INVESTIGACION.md)
 
-## 11. Entrega
-
-- Repositorio remoto: [Sebitou69/icc-est-u2-comparativa](https://github.com/Sebitou69/icc-est-u2-comparativa)
-- Hash del commit definitivo entregado en AVAC: [Completar después del último push]
-- Documento de investigación independiente: [INVESTIGACION.md](INVESTIGACION.md)
+El hash que se entrega en AVAC debe ser el del último commit después de terminar la práctica.

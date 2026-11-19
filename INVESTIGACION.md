@@ -1,76 +1,76 @@
-# INVESTIGACION — Quick Sort (PL1.1)
+# INVESTIGACIÓN - Quick Sort
 
-## Datos generales
+## Datos
 
-| Campo | Información |
-|---|---|
-| Institución | Universidad Politécnica Salesiana |
-| Carrera | Computación |
-| Asignatura | Estructura de Datos |
-| Práctica | PL1.1 — Comparativa de métodos de ordenamiento y benchmarking |
-| Docente | Ing. Pablo Torres, Mgtr. |
-| Autor | Sebastián Cárdenas |
-| Algoritmo elegido | Quick Sort |
-| Repositorio | [icc-est-u2-comparativa](https://github.com/Sebitou69/icc-est-u2-comparativa) |
+- **Universidad:** Universidad Politécnica Salesiana
+- **Carrera:** Computación
+- **Materia:** Estructura de Datos
+- **Docente:** Ing. Pablo Torres, Mgtr.
+- **Autor:** Sebastián Cárdenas
+- **Práctica:** PL1.1
 
-## 1. Identificación de la implementación
+## 1. Implementación utilizada
 
-- Archivo fuente: [src/Ordenamiento.java](src/Ordenamiento.java)
-- Método: `quickSort(int[] list, int start, int end)`
-- Invocación durante el experimento: [src/Experimentos.java](src/Experimentos.java)
-- Variante: partición con dos índices y pivote tomado de la posición central del intervalo, `list[(start + end) / 2]`.
-- Se utiliza como V2 sobre arreglos `int[]`, sin delegar la operación a `Arrays.sort`.
+El algoritmo investigado es Quick Sort. Se encuentra en [`src/Ordenamiento.java`](src/Ordenamiento.java), dentro del método `quickSort(int[] list, int start, int end)`. Se ejecuta desde [`src/Experimentos.java`](src/Experimentos.java) como la variante V2.
 
-[Explicar con palabras propias de dónde surgió la implementación, si se adaptó código consultado y qué decisiones se cambiaron.]
+Lo adapte de internet a traves de una guia por stack overflow cambiando el nombre de algunas variables como mas se me acomodara, ademas, le pedi a la ia que lo revisara pues parece que el codigo original tenia un bug de recursividad.
 
-## 2. Funcionamiento paso a paso y recursión
+La implementación final no es idéntica al ejemplo de Stack Overflow: en el repositorio se toma como pivote el valor de la posición central y se recorren los datos desde los dos extremos. El código de la pregunta de Stack Overflow utiliza el primer elemento como pivote y otra forma de particionar. GeeksforGeeks muestra la idea general de Quick Sort y otras variantes.
 
-Parámetros empleados: `list` (arreglo), `start` (índice inicial), `end` (índice final). La implementación retorna inmediatamente cuando `start >= end`.
+## 2. Funcionamiento
 
-[Explicar personalmente el caso base, cómo se mueven los índices `i` y `j`, cuándo intercambian, cómo se forman los subintervalos recursivos y por qué el proceso progresa.]
+El método recibe el arreglo y los índices `start` y `end` del tramo que debe ordenar.
 
-[Indicar la propiedad o invariante que se mantiene después de cada partición y justificar que el resultado final es ascendente.]
+1. Si `start >= end`, ya no hay nada que dividir y la llamada termina.
+2. El pivote se obtiene mediante `list[(start + end) / 2]`. Es el valor de la posición central, no necesariamente la mediana de los números.
+3. El índice `i` avanza desde la izquierda mientras encuentra valores menores que el pivote. `j` retrocede desde la derecha mientras encuentra valores mayores.
+4. Cuando `i <= j`, se intercambian esos elementos y ambos índices avanzan. Este paso también permite progresar si hay valores repetidos.
+5. Se repite el procedimiento en los dos tramos que quedaron pendientes. Los límites se reducen hasta alcanzar el caso base.
 
-## 3. Pivote, partición y valores repetidos
+Después de cada partición, los valores del tramo izquierdo no son mayores que los del tramo derecho; cada tramo se ordena recursivamente hasta obtener el arreglo ascendente.
 
-En la versión del repositorio, el pivote es el **valor** situado en el punto medio del intervalo; las comparaciones avanzan desde ambos extremos y realizan intercambios cuando `i <= j`.
+## 3. Pivote y repetidos
 
-[Explicar por qué se eligió ese pivote, qué ocurre cuando hay valores iguales, y cómo funcionan los límites de las llamadas recursivas.]
+El pivote se elige por su posición central en el tramo actual. Cuando dos valores son iguales al pivote, las comparaciones estrictas `<` y `>` se detienen, pero el intercambio y los cambios de `i` y `j` impiden que el bucle quede detenido.
 
-## 4. Traza manual solicitada
+El método ordena el mismo `int[]` recibido y no crea un segundo arreglo para particionar. La posición central no garantiza divisiones equilibradas: depende de los valores presentes en cada tramo.
 
-Entrada: `[7, 2, 7, 0, 4, 2]`  
-Salida esperada: `[0, 2, 2, 4, 7, 7]`
+## 4. Traza de referencia
 
-| Paso | Intervalo (`start`, `end`) | Pivote | Movimiento / intercambio | Estado del arreglo |
-|---|---|---|---|---|
-| 1 | [Completar] | [Completar] | [Completar] | [Completar] |
-| 2 | [Completar] | [Completar] | [Completar] | [Completar] |
-| 3 | [Completar] | [Completar] | [Completar] | [Completar] |
-| ... | [Agregar los pasos necesarios] | | | |
-| Final | | | | `[0, 2, 2, 4, 7, 7]` |
+Se sigue la lógica del método publicado para la entrada `[7, 2, 7, 0, 4, 2]`. Los índices comienzan en 0.
 
-[Completar manualmente todas las particiones y subdivisiones de **esta implementación**, no de otra variante de Quick Sort.]
+| Tramo | Pivote | Intercambio | Estado después |
+|---|---:|---|---|
+| 0–5 | 7 | posiciones 0 y 5 | `[2, 2, 7, 0, 4, 7]` |
+| 0–5 | 7 | posiciones 2 y 4 | `[2, 2, 4, 0, 7, 7]` |
+| 0–3 | 2 | posiciones 0 y 3 | `[0, 2, 4, 2, 7, 7]` |
+| 0–3 | 2 | posición 1 consigo misma | `[0, 2, 4, 2, 7, 7]` |
+| 2–3 | 4 | posiciones 2 y 3 | `[0, 2, 2, 4, 7, 7]` |
+| 4–5 | 7 | posiciones 4 y 5, con valores iguales | `[0, 2, 2, 4, 7, 7]` |
+
+La primera partición genera los tramos 0–3 y 4–5. El tramo 0–3 deja pendiente 2–3. Los tramos de un solo elemento no necesitan nuevas particiones. El resultado final es `[0, 2, 2, 4, 7, 7]`.
 
 ## 5. Complejidad, memoria y estabilidad
 
-| Aspecto solicitado | Desarrollo |
-|---|---|
-| Mejor caso temporal | [Orden de complejidad y justificación para esta partición] |
-| Caso promedio temporal | [Orden de complejidad, supuestos sobre los datos y justificación] |
-| Peor caso temporal | [Orden de complejidad y ejemplo que lo provoque en esta implementación] |
-| Memoria auxiliar | [Explicar almacenamiento adicional y pila de llamadas] |
-| Estabilidad | [Justificar si conserva o no el orden relativo de elementos iguales] |
+| Caso | Complejidad temporal | Motivo |
+|---|---|---|
+| Mejor caso | `O(n log n)` | Las particiones quedan aproximadamente equilibradas. |
+| Promedio | `O(n log n)` | Bajo una distribución de entradas que normalmente produce particiones suficientemente equilibradas. |
+| Peor caso | `O(n²)` | Las particiones quedan repetidamente muy desbalanceadas. |
 
-[Relacionar el análisis con las decisiones específicas del código. No atribuir propiedades de otras variantes a esta.]
+La partición hace los intercambios dentro del mismo arreglo, por lo que usa `O(1)` de espacio auxiliar directo. Sin embargo, la recursión ocupa pila: aproximadamente `O(log n)` con divisiones equilibradas y hasta `O(n)` en un caso muy desbalanceado.
 
-## 6. Caso desfavorable y relación con el benchmarking
+Esta implementación **no es estable**: al intercambiar elementos lejanos puede alterar el orden relativo de valores iguales. Con un `int[]` solo se observan los valores, no la identidad de cada elemento repetido.
 
-En [src/Pruebas.java](src/Pruebas.java) hay pruebas con 10 000 valores iguales y con un arreglo de 10 000 valores previamente ordenados. El registro de ejecución está en [evidencias/pruebas.md](evidencias/pruebas.md).
+## 6. Caso desfavorable y observaciones
 
-[Elegir y ejecutar un caso desfavorable para **este** Quick Sort, documentar la entrada, el resultado real, su evidencia y explicar por qué resulta desfavorable. Si se produce un fallo, indicar la causa y la corrección.]
+Patrón analizado: una lista que crece hasta el centro y después disminuye, por ejemplo `[1, 2, 3, 4, 5, 4, 3, 2, 1]`.
 
-Los tiempos de Quick Sort observados en la ejecución registrada son:
+En este ejemplo, el primer pivote es 5, el mayor valor. Al particionar, el 5 queda aislado al final y el resto permanece en un tramo grande. Si se repiten divisiones muy desbalanceadas, el trabajo puede aproximarse a `n + (n - 1) + (n - 2) + ... + 1`, que crece como `O(n²)`. No basta con que el centro sea máximo una sola vez: el comportamiento desfavorable depende de que el desequilibrio continúe en las llamadas siguientes.
+
+En [`src/Pruebas.java`](src/Pruebas.java) están verificadas las entradas con 10 000 valores iguales y con 10 000 valores ya ordenados. El patrón de pirámide fue descrito como prueba adicional por el autor, pero todavía no tiene un registro específico en las capturas del repositorio.
+
+Los resultados reales de Quick Sort en el benchmarking fueron:
 
 | Sample | Tiempo (ms) |
 |---:|---:|
@@ -78,13 +78,13 @@ Los tiempos de Quick Sort observados en la ejecución registrada son:
 | 50 000 | 3.9517 |
 | 100 000 | 6.9858 |
 
-[Relacionar al menos dos observaciones concretas con el análisis anterior y con las limitaciones de una medición por tamaño. No afirmar que un método es siempre más rápido.]
+De 10 000 a 50 000 elementos, el tiempo pasó de 1.3894 a 3.9517 ms. De 50 000 a 100 000 pasó de 3.9517 a 6.9858 ms. Estas observaciones corresponden a muestras aleatorias y una única medición por tamaño, así que no demuestran cómo se comportaría en todos los casos.
 
-## 7. Referencias técnicas y adaptación
+## 7. Fuentes y adaptación
 
-Citar al menos dos fuentes técnicas **realmente consultadas**, con datos identificables y fecha de consulta. Distinguir las ideas o fragmentos adaptados de las modificaciones propias.
+Las dos fuentes indicadas por el autor fueron consultadas el **18 de noviembre de 2026**:
 
-1. [Autor o entidad]. [Título del recurso]. [Enlace o datos bibliográficos]. Fecha de consulta: [día/mes/año].
-2. [Autor o entidad]. [Título del recurso]. [Enlace o datos bibliográficos]. Fecha de consulta: [día/mes/año].
+1. Stack Overflow. [Stackoverflow with Quicksort Java implementation](https://stackoverflow.com/questions/14907334/stackoverflow-with-quicksort-java-implementation). Pregunta y respuestas sobre el manejo de límites en llamadas recursivas.
+2. GeeksforGeeks. [Quick Sort](https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/). Explicación de pivotes, particiones y complejidad.
 
-[Describir las modificaciones efectuadas frente a las fuentes consultadas y redactar las explicaciones con palabras propias.]
+El proyecto utiliza una variante con pivote central e índices que avanzan desde ambos extremos. La descripción, la elección de los nombres de variables y la revisión de la recursividad corresponden a la adaptación indicada por el autor, con apoyo de IA en la revisión del código.
